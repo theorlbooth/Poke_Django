@@ -1,0 +1,38 @@
+[
+{
+  "model": "pokemons.pokemon",
+  "pk": 1,
+  "fields": {
+    "name": "Bulbasaur",
+    "number": 1,
+    "is_starter": true,
+    "generation": 1,
+    "pokedex_entry": "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.",
+    "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png"
+  }
+},
+{
+  "model": "pokemons.pokemon",
+  "pk": 2,
+  "fields": {
+    "name": "Ivysaur",
+    "number": 2,
+    "is_starter": true,
+    "generation": 1,
+    "pokedex_entry": "When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs.",
+    "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png"
+  }
+},
+{
+  "model": "pokemons.pokemon",
+  "pk": 3,
+  "fields": {
+    "name": "Venusaur",
+    "number": 3,
+    "is_starter": true,
+    "generation": 1,
+    "pokedex_entry": "Its plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight.",
+    "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/003.png"
+  }
+}
+]
