@@ -7,6 +7,10 @@ class Pokemon(models.Model):
     generation = models.PositiveIntegerField()
     pokedex_entry = models.CharField(max_length=200)
     image = models.CharField(max_length=300)
+    types = models.ManyToManyField(
+        'pokemon_types.PokemonType',
+        related_name='pokemons'
+    )
 
     def __str__(self):
         return f"{self.number} - {self.name}"
