@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'pokemons',
     'comments',
-    'pokemon_types'
+    'pokemon_types',
+    'jwt_auth'
 ]
 
 MIDDLEWARE = [
