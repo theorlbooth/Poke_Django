@@ -8,7 +8,11 @@
     "is_starter": true,
     "generation": 1,
     "pokedex_entry": "There is a plant seed on its back right from the day this Pokémon is born. The seed slowly grows larger.",
-    "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png"
+    "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/001.png",
+    "types": [
+      6,
+      10
+    ]
   }
 },
 {
@@ -20,7 +24,11 @@
     "is_starter": true,
     "generation": 1,
     "pokedex_entry": "When the bulb on its back grows large, it appears to lose the ability to stand on its hind legs.",
-    "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png"
+    "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/full/002.png",
+    "types": [
+      6,
+      10
+    ]
   }
 },
 {
@@ -32,7 +40,11 @@
     "is_starter": true,
     "generation": 1,
     "pokedex_entry": "Its plant blooms when it is absorbing solar energy. It stays on the move to seek sunlight.",
-    "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/003.png"
+    "image": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/003.png",
+    "types": [
+      6,
+      10
+    ]
   }
 }
 ]
