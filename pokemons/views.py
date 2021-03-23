@@ -52,5 +52,6 @@ class PokemonDetailView(APIView):
 
     def delete(self, _request, pk):
         pokemon_to_delete = self.get_pokemon(pk=pk)
+        deleted_name = pokemon_to_delete.name
         pokemon_to_delete.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response({ 'message': f'{deleted_name} Successfully Deleted' }, status=status.HTTP_410_GONE)
