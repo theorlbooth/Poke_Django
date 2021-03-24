@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import NotFound, PermissionDenied
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
 
 from .models import Pokemon
 from .serializers.common import PokemonSerializer
@@ -61,3 +61,16 @@ class PokemonDetailView(APIView):
         deleted_name = pokemon_to_delete.name
         pokemon_to_delete.delete()
         return Response({ 'message': f'{deleted_name} Successfully Deleted' }, status=status.HTTP_410_GONE)
+
+
+class PokemonFavoriteView(PokemonDetailView):
+
+    permission_classes = (IsAuthenticated, )
+
+    def post(self, request, pk):
+        pokemon_to_like = self.get_pokemon(pk=pk)
+        pokemon_to_like.favorited_by.add(request.user.id)
+        pokemon_to_like.save()
+        serialized_liked_pokemon = PopulatedPokemonSerializer(pokemon_to_like)
+        return Response(serialized_liked_pokemon.data, status=status.HTTP_201_CREATED)
+

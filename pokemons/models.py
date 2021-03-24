@@ -16,6 +16,11 @@ class Pokemon(models.Model):
       related_name='created_pokemon',
       on_delete=models.CASCADE
     )
+    favorited_by = models.ManyToManyField(
+        'jwt_auth.User',
+        related_name='favorited_pokemon',
+        blank=True
+    )
 
     def __str__(self):
         return f"{self.number} - {self.name}"

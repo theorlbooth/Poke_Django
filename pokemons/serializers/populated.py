@@ -8,3 +8,4 @@ class PopulatedPokemonSerializer(PokemonSerializer):
     comments = PopulatedCommentSerializer(many=True)
     types = PokemonTypeSerializer(many=True)
     owner = NestedUserSerializer()
+    favorited_by = NestedUserSerializer(many=True)
