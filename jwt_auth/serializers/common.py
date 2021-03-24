@@ -18,19 +18,25 @@ class UserSerializer(serializers.ModelSerializer):
         if password != password_confirmation:
             raise ValidationError({ 'password_confirmation': 'does not match' })
 
-        try:
-            password_validation.validate_password(password=password)
-        except ValidationError as err:
-            raise ValidationError({ 'password': err.messages })
+        # ! Commented out whilst developing
+        # try:
+        #     password_validation.validate_password(password=password)
+        # except ValidationError as err:
+        #     raise ValidationError({ 'password': err.messages })
 
         data['password'] = make_password(password)
         return data
 
     class Meta:
         model = User
+        fields = '__all__'
+
+
+class NestedUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
         fields = (
-          'password',
-          'password_confirmation',
           'id',
           'username'
-          )
+        )

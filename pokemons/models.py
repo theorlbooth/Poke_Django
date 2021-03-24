@@ -14,7 +14,7 @@ class Pokemon(models.Model):
     owner = models.ForeignKey(
       'jwt_auth.User',
       related_name='created_pokemon',
-      on_delete=models.DO_NOTHING
+      on_delete=models.CASCADE
     )
 
     def __str__(self):

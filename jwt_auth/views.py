@@ -3,9 +3,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.exceptions import NotFound, PermissionDenied
+from rest_framework.permissions import IsAuthenticated
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from .serializers.common import UserSerializer
+from .serializers.populated import PopulatedUserSerializer
 import jwt
 
 
@@ -44,3 +46,13 @@ class LoginView(APIView):
         return Response(
           { 'token': token, 'message': f'Welcome Back {user_to_login.username}' }
         )
+
+
+class ProfileView(APIView):
+
+    permission_classes = (IsAuthenticated, )
+
+    def get(self, request):
+        user = User.objects.get(pk=request.user.id)
+        serialized_user = PopulatedUserSerializer(user)
+        return Response(serialized_user.data, status=status.HTTP_200_OK)
