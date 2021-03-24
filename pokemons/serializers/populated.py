@@ -1,8 +1,9 @@
-from comments.serializers.common import CommentSerializer
+from comments.serializers.populated import PopulatedCommentSerializer
 from ..serializers.common import PokemonSerializer
 from pokemon_types.serializers.common import PokemonTypeSerializer
-
+from jwt_auth.serializers.common import UserSerializer
 class PopulatedPokemonSerializer(PokemonSerializer):
 
-    comments = CommentSerializer(many=True)
+    comments = PopulatedCommentSerializer(many=True)
     types = PokemonTypeSerializer(many=True)
+    owner = UserSerializer()

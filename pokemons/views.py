@@ -1,7 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.exceptions import NotFound
+from rest_framework.exceptions import NotFound, PermissionDenied
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from .models import Pokemon
@@ -19,6 +19,7 @@ class PokemonListView(APIView):
         return Response(serialized_pokemon.data, status=status.HTTP_200_OK)
 
     def post(self, request):
+        request.data['owner'] = request.user.id
         pokemon_to_create = PokemonSerializer(data=request.data)
         if pokemon_to_create.is_valid():
             pokemon_to_create.save()
@@ -44,14 +45,19 @@ class PokemonDetailView(APIView):
 
     def put(self, request, pk):
         pokemon_to_update = self.get_pokemon(pk=pk)
+        request.data['owner'] = request.user.id
+        if pokemon_to_update.owner.id != request.user.id:
+            raise PermissionDenied()
         updated_pokemon = PokemonSerializer(pokemon_to_update, data=request.data)
         if updated_pokemon.is_valid():
             updated_pokemon.save()
             return Response(updated_pokemon.data, status=status.HTTP_202_ACCEPTED)
         return Response(updated_pokemon.errors, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
-    def delete(self, _request, pk):
+    def delete(self, request, pk):
         pokemon_to_delete = self.get_pokemon(pk=pk)
+        if pokemon_to_delete.owner.id != request.user.id:
+            raise PermissionDenied()
         deleted_name = pokemon_to_delete.name
         pokemon_to_delete.delete()
         return Response({ 'message': f'{deleted_name} Successfully Deleted' }, status=status.HTTP_410_GONE)

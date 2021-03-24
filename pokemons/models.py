@@ -11,6 +11,11 @@ class Pokemon(models.Model):
         'pokemon_types.PokemonType',
         related_name='pokemons'
     )
+    owner = models.ForeignKey(
+      'jwt_auth.User',
+      related_name='created_pokemon',
+      on_delete=models.DO_NOTHING
+    )
 
     def __str__(self):
         return f"{self.number} - {self.name}"
